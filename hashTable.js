@@ -22,6 +22,15 @@ class HashTable {
           delete this.values[hash][key]
   }
 
+  getValue(key) {
+    const hash = this.generateHash(key)
+
+    if(this.values.hasOwnProperty(hash) &&
+          this.values[hash].hasOwnProperty(key))
+      return this.values[hash][key]      
+     
+  }
+
   generateHash(key) {
     let keyStr = key.toString()
     let sum = 0
@@ -77,7 +86,7 @@ class HashTable {
   // { key2 ,  value2 }
   // { key7 ,  value7 }
 
-  log(hashTable.values)
+  log(hashTable.values, "\n")
   /*
   {
     '0': { key3: 'value3', key8: 'value8' },
@@ -92,9 +101,16 @@ class HashTable {
   */
 
   /******************************************************** */
-  // Test 3 - it should remove a key/value pair with given key
+  // Test 3 - it should return key/value pair with given key
+  
+  log(`Value of "key2":`, hashTable.getValue("key2"), "\n")
+  
+  // Value of "key2": value2
 
-  log("Removing key2")
+  /******************************************************** */
+  // Test 4 - it should remove a key/value pair with given key
+
+  log("Removing key2:")
   hashTable.remove("key2")
   // hashTable.printAll()
   // Removing key2
@@ -117,5 +133,11 @@ class HashTable {
   //   '4': { key7: 'value7' }
   // }
 
+  /******************************************************** */
+  // Test 5 - it should return undefined when trying to access removed key
   
+  log(`Value of "key2":`, hashTable.getValue("key2"))
+  
+  // Value of "key2": undefined
+
 })()
